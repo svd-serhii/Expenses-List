@@ -1,11 +1,20 @@
 import React from "react";
 import "./NewExpense.css";
 import ExpenseForm from "./ExpenseForm";
+import { nanoid } from "nanoid";
 
-const NewExpense = () => {
+const NewExpense = (props) => {
+  const savedExpenseData = (enteredExpenseData) => {
+    const expenseData = {
+      ...enteredExpenseData,
+      id: nanoid(),
+    };
+    props.onAddExpense(expenseData);
+  };
+
   return (
     <div className="new-expense">
-      <ExpenseForm />
+      <ExpenseForm onSavedExpenseData={savedExpenseData} />
     </div>
   );
 };
